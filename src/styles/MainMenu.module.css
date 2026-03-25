@@ -1,0 +1,438 @@
+/* ── Main Menu ────────────────────────────────────────────────────────────── */
+.menuRoot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  overflow-y: auto;
+  position: relative;
+}
+
+.particleField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floatingParticle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0.4;
+}
+
+.menuContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 20px;
+}
+
+/* Title */
+.titleBlock {
+  text-align: center;
+}
+
+.titleMain {
+  font-family: var(--font-mono);
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--accent-blue);
+  text-shadow: 0 0 40px rgba(79, 195, 247, 0.5);
+  letter-spacing: 4px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.titleTagline {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Atom decoration */
+.atomDecor {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nucleus {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e74c3c 0%, #95a5a6 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+}
+
+.nucleusLabel {
+  font-size: 16px;
+}
+
+.orbit1, .orbit2, .orbit3 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 195, 247, 0.4);
+  animation: spin linear infinite;
+}
+
+.orbit1 {
+  width: 60px;
+  height: 60px;
+  animation-duration: 3s;
+  border-style: solid;
+}
+
+.orbit2 {
+  width: 80px;
+  height: 80px;
+  animation-duration: 5s;
+  animation-direction: reverse;
+  border-style: dashed;
+}
+
+.orbit3 {
+  width: 100px;
+  height: 100px;
+  animation-duration: 8s;
+  border-style: dotted;
+}
+
+/* Menu buttons */
+.menuButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.menuButton {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.menuButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.menuButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.menuButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.buttonPrimary {
+  background: var(--accent-blue);
+  color: #000;
+  box-shadow: 0 4px 20px rgba(79, 195, 247, 0.4);
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  box-shadow: 0 6px 28px rgba(79, 195, 247, 0.6);
+}
+
+.buttonSecondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 16px rgba(79, 195, 247, 0.2);
+}
+
+.buttonIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.buttonSub {
+  font-size: 11px;
+  font-weight: normal;
+  color: inherit;
+  opacity: 0.7;
+  margin-left: auto;
+}
+
+.version {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* Back button */
+.backButton {
+  align-self: flex-start;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.backButton:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+}
+
+.backLink {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+}
+
+/* ── Lobby Screen ─────────────────────────────────────────────────────────── */
+.lobbyActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+.lobbyInput {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.lobbyInput:focus {
+  border-color: var(--accent-blue);
+}
+
+.lobbyInput::placeholder {
+  color: var(--text-dim);
+}
+
+.lobbyRoom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gameCode {
+  background: var(--bg-elevated);
+  border: 2px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gameCodeLabel {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gameCodeValue {
+  font-size: 28px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: var(--accent-gold);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.gameCodeHint {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playerListTitle {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.playerName {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.hostBadge {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  background: var(--accent-gold);
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.youBadge {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  background: var(--accent-blue);
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.readyBadge {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--accent-green);
+}
+
+.waitingMessage {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  animation: pulse 2s infinite;
+}
+
+.errorBanner {
+  width: 100%;
+  background: rgba(231, 76, 60, 0.15);
+  border: 1px solid var(--accent-red);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--accent-red);
+  font-family: var(--font-mono);
+  text-align: center;
+}
+
+/* ── Daily Puzzle ─────────────────────────────────────────────────────────── */
+.dailyCard {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--accent-blue);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.dailyElementDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dailyAtomicNumber {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.dailySymbol {
+  font-size: 52px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: var(--accent-blue);
+  text-shadow: 0 0 20px rgba(79, 195, 247, 0.5);
+  line-height: 1;
+}
+
+.dailyElementName {
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.dailyTargetInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dailyTargetTitle {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.dailyTargetRow {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.dailyRules {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.dailyRules p + p {
+  margin-top: 4px;
+}

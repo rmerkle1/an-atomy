@@ -1,0 +1,770 @@
+/* ── HUD Root Layout ─────────────────────────────────────────────────────── */
+.hudRoot {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px;
+  grid-template-rows: 1fr;
+  width: 800px;
+  height: 220px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-accent);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hudLeft {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 8px 4px;
+  border-right: 1px solid var(--border-accent);
+  overflow: hidden;
+}
+
+.hudCenter {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px;
+  position: relative;
+}
+
+.hudRight {
+  grid-column: 3;
+  grid-row: 1;
+  padding: 8px 4px;
+  border-left: 1px solid var(--border-accent);
+  overflow: hidden;
+}
+
+/* ── Status Message ──────────────────────────────────────────────────────── */
+.statusMessage {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  min-height: 18px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Card Hand ───────────────────────────────────────────────────────────── */
+.cardHand {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  align-items: stretch;
+}
+
+.hudBottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 4px;
+}
+
+.revealArea {
+  text-align: right;
+}
+
+.targetHint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* ── Individual Card ─────────────────────────────────────────────────────── */
+.card {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-card);
+  border: 2px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  user-select: none;
+}
+
+.cardPlayable {
+  cursor: pointer;
+}
+
+.cardPlayable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(79, 195, 247, 0.3);
+}
+
+.cardPlayable:active {
+  transform: translateY(-1px);
+}
+
+.cardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardRestricted {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.cardInterference {
+  border-style: dashed;
+}
+
+.tierBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.cardName {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  margin-bottom: 4px;
+  padding-right: 28px;
+  line-height: 1.2;
+}
+
+.particleDots {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  min-height: 12px;
+}
+
+.particleDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.cardDescription {
+  font-size: 9px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.restrictedBadge {
+  font-size: 8px;
+  color: #e67e22;
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.discardButton {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 12px;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.discardButton:hover {
+  opacity: 1;
+}
+
+/* ── Stability Meter ─────────────────────────────────────────────────────── */
+.stabilityMeter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 4px;
+}
+
+.stabilityLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.stabilityLetter {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.barContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.barTrack {
+  flex: 1;
+  width: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.barFill {
+  width: 100%;
+  border-radius: 3px;
+  min-height: 2px;
+}
+
+.zoneLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+.barPercent {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.barZoneLabel {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.indicatorIcon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.indicatorLabel {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.shieldBadge {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: #4fc3f7;
+  background: rgba(79, 195, 247, 0.1);
+  border: 1px solid #4fc3f7;
+  border-radius: 4px;
+  padding: 2px 4px;
+  text-align: center;
+}
+
+/* ── Progress Panel ──────────────────────────────────────────────────────── */
+.progressPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 4px;
+  align-items: center;
+}
+
+.progressLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progressLetter {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: bold;
+  color: var(--accent-gold);
+  line-height: 1.4;
+}
+
+.targetElement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elementSymbol {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-blue);
+  line-height: 1;
+}
+
+.elementName {
+  font-size: 8px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.particleProgress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.particleRow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.particleLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.particleBarTrack {
+  flex: 1;
+  height: 5px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.particleBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.particleCount {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.turnCounter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.turnLabel {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.turnCount {
+  font-size: 18px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.deckTracker {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.deckLabel {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.deckBarTrack {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.deckBarFill {
+  height: 100%;
+  background: var(--accent-blue);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.deckCount {
+  font-size: 8px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.halfLifeTimer {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: #e74c3c;
+  animation: pulse 1s infinite;
+}
+
+.completeBadge {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+/* ── Companion Panel ─────────────────────────────────────────────────────── */
+.companionPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  padding: 6px 8px;
+  min-width: 80px;
+}
+
+.companionHeader {
+  font-size: 8px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.companionAtom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.companionSymbol {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--accent-blue);
+}
+
+.companionCharge {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+}
+
+.companionUses {
+  display: flex;
+  gap: 3px;
+}
+
+.useDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  display: inline-block;
+}
+
+.useDotEmpty {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--border-accent);
+  display: inline-block;
+}
+
+.companionButton {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-accent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.companionButtonActive {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: rgba(79, 195, 247, 0.1);
+}
+
+.companionButtonActive:hover {
+  background: rgba(79, 195, 247, 0.2);
+}
+
+/* ── Win / Lose Overlays ─────────────────────────────────────────────────── */
+.winOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 20, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  z-index: 10;
+  gap: 8px;
+}
+
+.winTitle {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--accent-green);
+  text-shadow: 0 0 20px var(--accent-green);
+}
+
+.starRating {
+  display: flex;
+  gap: 6px;
+}
+
+.starFilled {
+  font-size: 24px;
+  color: var(--accent-gold);
+  text-shadow: 0 0 10px var(--accent-gold);
+}
+
+.starEmpty {
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.loseOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  z-index: 10;
+  gap: 8px;
+}
+
+.loseTitle {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--accent-red);
+  text-shadow: 0 0 20px var(--accent-red);
+}
+
+.loseSubtitle {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 240px;
+}
+
+/* ── Decay Modal ─────────────────────────────────────────────────────────── */
+.decayModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.decayModalCard {
+  width: 160px;
+  height: 220px;
+}
+
+.decayCardInner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.decayCardFace {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border: 2px solid var(--accent-blue);
+}
+
+.decayCardBack {
+  background: var(--bg-elevated);
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.decayCardQuestion {
+  font-size: 64px;
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  text-shadow: 0 0 20px var(--accent-blue);
+}
+
+.decayCardBackLabel {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--accent-blue);
+  letter-spacing: 2px;
+}
+
+.decayCardFront {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  gap: 10px;
+  text-align: center;
+}
+
+.decayEventLabel {
+  font-size: 16px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.decayEventDescription {
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+}
+
+.decayEventWarning {
+  font-size: 10px;
+  color: #ffd700;
+  font-family: var(--font-mono);
+}
+
+.decayClickHint {
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  margin-top: 16px;
+  animation: pulse 2s infinite;
+}
+
+/* ── Tutorial Overlay ────────────────────────────────────────────────────── */
+.tutorialOverlay {
+  position: fixed;
+  bottom: 230px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  pointer-events: none;
+}
+
+.tutorialBubble {
+  background: var(--bg-elevated);
+  border: 2px solid var(--accent-gold);
+  border-radius: 12px;
+  padding: 14px 18px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: all;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.tutorialAtomIcon {
+  font-size: 24px;
+}
+
+.tutorialText {
+  font-size: 13px;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.tutorialNext {
+  background: var(--accent-gold);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.tutorialNext:hover {
+  opacity: 0.85;
+}
+
+.tutorialProgress {
+  display: flex;
+  gap: 5px;
+}
+
+.tutorialDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.tutorialDotActive {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+}
